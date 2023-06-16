@@ -13,3 +13,8 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+export const CREATE_QUOTE = gql`
+  mutation createQuote($quote: String!) {
+    quote: createQuote(name: $quote)
+  }
+`;

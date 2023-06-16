@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_QUOTES } from "../graphql/queries";
 import ErrorHOC from "./ErrorHOC";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const { loading, data, error } = useQuery(GET_ALL_QUOTES);
@@ -47,8 +48,12 @@ export default function Home() {
         data?.quotes?.map((quote: any) => {
           return (
             <blockquote>
-              <h6>{quote.name}</h6>
-              <p className="right-align">~{quote.by.firstName}</p>
+              <p>{quote.name}</p>
+              <Link to={`/user/${quote.by._id}`}>
+                <div className="right-align author-name">
+                  ~{quote.by.firstName}
+                </div>
+              </Link>
             </blockquote>
           );
         })

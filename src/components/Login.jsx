@@ -62,7 +62,10 @@ export default function Login() {
         <Link to="/signup">
           <p>Dont have an account ?</p>
         </Link>
-        <button className="btn deep-purple" type="submit">
+        <button
+          className={loading ? "btn deep-purple disabled" : "btn deep-purple"}
+          type="submit"
+        >
           Login
         </button>
       </form>

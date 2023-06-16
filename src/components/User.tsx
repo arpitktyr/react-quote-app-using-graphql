@@ -1,18 +1,14 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
+import { GET_USER_BY_ID } from "../graphql/queries";
+import { useParams } from "react-router-dom";
 import Loading from "./Loading";
 import ErrorHOC from "./ErrorHOC";
-import { useQuery } from "@apollo/client";
-import { GET_MY_PROFILE } from "../graphql/queries";
-import { useNavigate } from "react-router-dom";
-
-export default function Profile() {
-  const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_MY_PROFILE);
-  console.log(data);
-  if (!localStorage.getItem("token")) {
-    navigate("/login");
-    return <ErrorHOC>unauthorized</ErrorHOC>;
-  }
+export default function User() {
+  const { userid } = useParams();
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+    variables: { userid },
+  });
 
   return (
     <div className="container my-container">
@@ -32,14 +28,14 @@ export default function Profile() {
             </h5>
             <h6>Email - {data.user.email}</h6>
           </div>
-          <h4 className="deep-purple-text">Your quotes</h4>
+          <h4 className="deep-purple-text">{data.user.firstName}'s quotes</h4>
           {data.user.quotes.map((quo: any) => {
             return (
               <blockquote>
                 <h6>{quo.name}</h6>
               </blockquote>
             );
-          })}{" "}
+          })}
         </>
       )}
     </div>
