@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function CreateQuote() {
   const navigate = useNavigate();
   const [createQuote, { error, loading, data }] = useMutation(CREATE_QUOTE, {
-    refetchQueries: [{ query: GET_ALL_QUOTES }],
+    refetchQueries: ["getAllQuotes", "getMyProfile"],
   });
 
   const [quote, setQuote] = useState("");
