@@ -16,6 +16,9 @@ export default function Header() {
           Quote App
         </Link>
         <ul id="nav-mobile" className="right">
+          <li>
+            <Link to="/"> Home </Link>
+          </li>
           {token ? (
             <>
               <li>
