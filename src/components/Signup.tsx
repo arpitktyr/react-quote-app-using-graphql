@@ -1,21 +1,43 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { SIGNUP_USER } from "../graphql/mutations";
+import Loading from "./Loading";
+import ErrorHOC from "./ErrorHOC";
 export default function Signup() {
+  const [signupUser, { data, error, loading }] = useMutation(SIGNUP_USER);
   const [formData, setFormData] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
+    signupUser({
+      variables: {
+        userNew: formData,
+      },
+    });
   };
+
   return (
     <div className="container my-container">
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <ErrorHOC>{error.message}</ErrorHOC>
+      ) : (
+        data?.user && (
+          <div className="success green-text">
+            {data.user.firstName} is Signedup. You can login now.
+          </div>
+        )
+      )}
       <h5>Signup!!</h5>
       <form onSubmit={handleSubmit}>
         <input
@@ -24,12 +46,14 @@ export default function Signup() {
           name="firstName"
           onChange={handleChange}
           required
+          aria-label="First Name"
         />
         <input
           type="text"
           placeholder="Last Name"
           name="lastName"
           onChange={handleChange}
+          aria-label="Last Name"
           required
         />
         <input
@@ -37,6 +61,7 @@ export default function Signup() {
           placeholder="email"
           name="email"
           onChange={handleChange}
+          aria-label="Email"
           required
         />
         <input
@@ -44,12 +69,17 @@ export default function Signup() {
           placeholder="password"
           name="password"
           onChange={handleChange}
+          aria-label="Password"
           required
         />
         <Link to="/login">
           <p>Already have an account ?</p>
         </Link>
-        <button className="btn deep-purple" type="submit">
+
+        <button
+          className={loading ? "btn deep-purple disabled" : "btn deep-purple"}
+          type="submit"
+        >
           Submit
         </button>
       </form>

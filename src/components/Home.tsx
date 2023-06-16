@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+//import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_QUOTES } from "../graphql/queries";
+import ErrorHOC from "./ErrorHOC";
+import Loading from "./Loading";
 
 export default function Home() {
   const { loading, data, error } = useQuery(GET_ALL_QUOTES);
@@ -38,13 +40,11 @@ export default function Home() {
   return (
     <div className="container">
       {loading ? (
-        <div className="progress" aria-label="Loading">
-          <div className="indeterminate"></div>
-        </div>
+        <Loading />
       ) : error ? (
-        `<span className="red-text error">${error.message}</span>`
+        <ErrorHOC>{error.message}</ErrorHOC>
       ) : (
-        data.quotes.map((quote: any) => {
+        data?.quotes?.map((quote: any) => {
           return (
             <blockquote>
               <h6>{quote.name}</h6>
@@ -53,8 +53,8 @@ export default function Home() {
           );
         })
       )}
-      {!data.quotes.length && (
-        <span className="red-text error">No Quotes Found.</span>
+      {!loading && !error && !data?.quotes?.length && (
+        <ErrorHOC>No Quotes Found.</ErrorHOC>
       )}
     </div>
   );
