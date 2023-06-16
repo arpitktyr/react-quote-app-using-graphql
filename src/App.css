@@ -1,6 +1,7 @@
 .my-container {
   max-width: 400px !important;
 }
+
 .progress {
   margin: 30px 0;
   background-color: #8c71b977;
@@ -15,6 +16,7 @@
   font-weight: 500;
   font-size: 16px;
 }
+
 .success {
   border-radius: 5px;
   background-color: rgba(0, 128, 0, 0.196);
@@ -25,6 +27,10 @@
   font-size: 16px;
 }
 
+.nav-wrapper {
+  padding: 0 20px;
+}
+
 .progress .indeterminate {
   background-color: #673ab7;
 }
@@ -32,4 +38,18 @@
 input:focus {
   border-bottom: 2px solid #673ab7 !important;
   box-shadow: none !important;
+}
+
+/* CSS for Quote Showing Effect in Materialize CSS */
+
+blockquote p {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.author-name {
+  color: #673ab7;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 500;
 }

@@ -10,6 +10,9 @@ import { GRAPHQL_API } from "./constants";
 const client = new ApolloClient({
   uri: GRAPHQL_API,
   cache: new InMemoryCache(),
+  headers: {
+    authorization: localStorage.getItem("token") || "",
+  },
 });
 
 const root = ReactDOM.createRoot(
