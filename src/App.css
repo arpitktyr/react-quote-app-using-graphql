@@ -42,6 +42,19 @@ input:focus {
 
 /* CSS for Quote Showing Effect in Materialize CSS */
 
+.mob-icon,
+.brand-logo {
+  height: 100%;
+}
+
+.logo {
+  max-height: 82%;
+  object-fit: contain;
+  position: relative;
+  left: -19px;
+  margin: 5px 0;
+}
+
 blockquote p {
   font-size: 20px;
   font-weight: 400;
