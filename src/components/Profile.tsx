@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_MY_PROFILE);
+  const { loading, error, data } = useQuery(GET_MY_PROFILE, {
+    fetchPolicy: "no-cache",
+  });
   console.log(data);
   if (!localStorage.getItem("token")) {
     navigate("/login");
@@ -18,7 +20,7 @@ export default function Profile() {
     <div className="container my-container">
       {loading && <Loading />}
       {error && <ErrorHOC> {error.message} </ErrorHOC>}
-      {!loading && (
+      {!loading && data?.user && (
         <>
           <div className="center-align">
             <img
@@ -35,7 +37,7 @@ export default function Profile() {
           <h4 className="deep-purple-text">Your quotes</h4>
           {data.user.quotes.map((quo: any) => {
             return (
-              <blockquote>
+              <blockquote key={quo.name}>
                 <h6>{quo.name}</h6>
               </blockquote>
             );

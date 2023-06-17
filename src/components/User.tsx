@@ -31,7 +31,7 @@ export default function User() {
           <h4 className="deep-purple-text">{data.user.firstName}'s quotes</h4>
           {data.user.quotes.map((quo: any) => {
             return (
-              <blockquote>
+              <blockquote key={quo.name}>
                 <h6>{quo.name}</h6>
               </blockquote>
             );

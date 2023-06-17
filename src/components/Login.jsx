@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { useMutation, useApolloClient } from "@apollo/client";
 import { LOGIN_USER } from "../graphql/mutations";
 import Loading from "./Loading";
 import ErrorHOC from "./ErrorHOC";
 
 export default function Login() {
+  const client = useApolloClient();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER, {
+    onCompleted(data) {
+      client.resetStore();
+    },
+    fetchPolicy: "no-cache",
+  });
 
+  //You can also write Oncompleted() function in usemutation which do the same thing.
   if (data?.user?.token) {
     localStorage.setItem("token", data.user.token);
 
     setTimeout(() => {
       navigate("/");
-    }, 2000);
+    }, 1000);
   }
 
   const handleChange = (e) => {

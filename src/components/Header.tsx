@@ -6,6 +6,7 @@ export default function Header() {
   const navigate = useNavigate();
   const logoutHandler = () => {
     localStorage.removeItem("token");
+
     navigate("/login");
   };
 

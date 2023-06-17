@@ -47,7 +47,7 @@ export default function Home() {
       ) : (
         data?.quotes?.map((quote: any) => {
           return (
-            <blockquote>
+            <blockquote key={quote.name}>
               <p>{quote.name}</p>
               <Link to={`/user/${quote.by._id}`}>
                 <div className="right-align author-name">

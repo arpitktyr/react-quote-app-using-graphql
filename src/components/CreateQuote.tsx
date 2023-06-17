@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { CREATE_QUOTE } from "../graphql/mutations";
-import { GET_ALL_QUOTES } from "../graphql/queries";
 import { useMutation } from "@apollo/client";
 import Loading from "./Loading";
 import ErrorHOC from "./ErrorHOC";
