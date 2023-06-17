@@ -4,13 +4,14 @@ import ErrorHOC from "./ErrorHOC";
 import { useQuery } from "@apollo/client";
 import { GET_MY_PROFILE } from "../graphql/queries";
 import { useNavigate } from "react-router-dom";
+import { quote_type } from "../types";
 
 export default function Profile() {
   const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_MY_PROFILE, {
     fetchPolicy: "no-cache",
   });
-  console.log(data);
+  //console.log(data);
   if (!localStorage.getItem("token")) {
     navigate("/login");
     return <ErrorHOC>unauthorized</ErrorHOC>;
@@ -35,7 +36,7 @@ export default function Profile() {
             <h6>Email - {data.user.email}</h6>
           </div>
           <h4 className="deep-purple-text">Your quotes</h4>
-          {data.user.quotes.map((quo: any) => {
+          {data.user.quotes.map((quo: quote_type) => {
             return (
               <blockquote key={quo.name}>
                 <h6>{quo.name}</h6>

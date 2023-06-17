@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { SIGNUP_USER } from "../graphql/mutations";
@@ -8,14 +8,14 @@ export default function Signup() {
   const [signupUser, { data, error, loading }] = useMutation(SIGNUP_USER);
   const [formData, setFormData] = useState({});
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(formData);
     signupUser({

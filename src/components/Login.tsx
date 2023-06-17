@@ -25,14 +25,14 @@ export default function Login() {
     }, 1000);
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
     loginUser({
@@ -40,7 +40,6 @@ export default function Login() {
         userSignIn: formData,
       },
     });
-    //navigate("/");
   };
   return (
     <div className="container my-container">

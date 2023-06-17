@@ -12,7 +12,7 @@ export default function CreateQuote() {
   });
 
   const [quote, setQuote] = useState("");
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(quote);
     createQuote({

@@ -4,6 +4,7 @@ import { GET_USER_BY_ID } from "../graphql/queries";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
 import ErrorHOC from "./ErrorHOC";
+import { quote_type } from "../types";
 export default function User() {
   const { userid } = useParams();
   const { loading, error, data } = useQuery(GET_USER_BY_ID, {
@@ -29,7 +30,7 @@ export default function User() {
             <h6>Email - {data.user.email}</h6>
           </div>
           <h4 className="deep-purple-text">{data.user.firstName}'s quotes</h4>
-          {data.user.quotes.map((quo: any) => {
+          {data.user.quotes.map((quo: quote_type) => {
             return (
               <blockquote key={quo.name}>
                 <h6>{quo.name}</h6>

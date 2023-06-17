@@ -4,6 +4,7 @@ import { GET_ALL_QUOTES } from "../graphql/queries";
 import ErrorHOC from "./ErrorHOC";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
+import { quote_type } from "../types";
 
 export default function Home() {
   const { loading, data, error } = useQuery(GET_ALL_QUOTES);
@@ -45,7 +46,7 @@ export default function Home() {
       ) : error ? (
         <ErrorHOC>{error.message}</ErrorHOC>
       ) : (
-        data?.quotes?.map((quote: any) => {
+        data?.quotes?.map((quote: quote_type) => {
           return (
             <blockquote key={quote.name}>
               <p>{quote.name}</p>
